@@ -14,6 +14,9 @@ namespace IPA
             Console.WriteLine("Ar naudoti masyva(1) ar lista(2)?");
             int type = int.Parse(Console.ReadLine());
 
+            Console.WriteLine("Ar naudoti generuoti pazymius(1) ar ivesti ranka(2)?");
+            int rand = int.Parse(Console.ReadLine());
+
             Console.WriteLine("Iveskite studenta:");
 
             while (true)
@@ -27,7 +30,14 @@ namespace IPA
                 {
                     s = new Student();
                 }
-                s.Create();
+
+                if (rand == 1)
+                {
+                    s.CreateRandom();
+                } else if(rand == 2)
+                {
+                    s.Create();
+                }
 
                 students.Add(s);
 

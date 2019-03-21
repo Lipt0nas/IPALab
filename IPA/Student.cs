@@ -49,6 +49,23 @@ namespace IPA
             return 0.3f * med + 0.7f * examGrade;
         }
 
+        public void CreateRandom()
+        {
+            Console.Write("Iveskite studento varda: ");
+            name = Console.ReadLine();
+
+            Console.Write("Iveskite studento pavarde: ");
+            lastName = Console.ReadLine();
+
+            Random r = new Random();
+            examGrade = r.Next(1, 11);
+
+            for(int i = 0; i < r.Next(1, 21); i++)
+            {
+                AddHomeworkGrade(r.Next(1, 11));
+            }
+        }
+
         public void Create()
         {
             Console.Write("Iveskite studento varda: ");
