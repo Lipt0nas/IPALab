@@ -31,6 +31,24 @@ namespace IPA
             return 0.3f * ((float)sum / homeworkGrades.Count) + 0.7f * examGrade;
         }
 
+        public float getGrageMedian()
+        {
+            float med = 0;
+
+            List<int> temp = new List<int>(homeworkGrades);
+            temp.Sort();
+            
+            if(temp.Count % 2 == 0)
+            {
+                med = temp.ElementAt(temp.Count / 2);
+            } else
+            {
+                med = (float)(temp.ElementAt(temp.Count / 2) + temp.ElementAt((temp.Count / 2) - 1)) / 2.0f;
+            }
+
+            return 0.3f * med + 0.7f * examGrade;
+        }
+
         public void Create()
         {
             Console.Write("Iveskite studento varda: ");
