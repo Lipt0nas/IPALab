@@ -19,19 +19,19 @@ namespace IPA
             homeworkGrades = new List<int>();
         }
 
-        public void AddHomeworkGrade(int grade)
+        public virtual void AddHomeworkGrade(int grade)
         {
             homeworkGrades.Add(grade);
         }
 
-        public float getGradeAvg()
+        public virtual float GetGradeAvg()
         {
             int sum = homeworkGrades.Sum();
 
             return 0.3f * ((float)sum / homeworkGrades.Count) + 0.7f * examGrade;
         }
 
-        public float getGrageMedian()
+        public virtual float GetGradeMedian()
         {
             float med = 0;
 
