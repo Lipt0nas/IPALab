@@ -10,32 +10,32 @@ namespace IPA
         public string Name { set; get; }
         public string LastName { set; get; }
 
-        public int examGrade { get; set; }
+        public int ExamGrade { get; set; }
 
-        public List<int> homeworkGrades { get; }
+        public List<int> HomeworkGrades { get; }
 
         public Student()
         {
-            homeworkGrades = new List<int>();
+            HomeworkGrades = new List<int>();
         }
 
         public void AddHomeworkGrade(int grade)
         {
-            homeworkGrades.Add(grade);
+            HomeworkGrades.Add(grade);
         }
 
         public float GetGradeAvg()
         {
-            int sum = homeworkGrades.Sum();
+            int sum = HomeworkGrades.Sum();
 
-            return 0.3f * ((float)sum / homeworkGrades.Count) + 0.7f * examGrade;
+            return 0.3f * ((float)sum / HomeworkGrades.Count) + 0.7f * ExamGrade;
         }
 
         public float GetGradeMedian()
         {
             float med = 0;
 
-            List<int> temp = new List<int>(homeworkGrades);
+            List<int> temp = new List<int>(HomeworkGrades);
             temp.Sort();
             
             if(temp.Count % 2 == 0)
@@ -46,7 +46,7 @@ namespace IPA
                 med = (float)(temp.ElementAt(temp.Count / 2) + temp.ElementAt((temp.Count / 2) - 1)) / 2.0f;
             }
 
-            return 0.3f * med + 0.7f * examGrade;
+            return 0.3f * med + 0.7f * ExamGrade;
         }
 
         public void CreateRandom()
@@ -58,7 +58,7 @@ namespace IPA
             LastName = Console.ReadLine();
 
             Random r = new Random();
-            examGrade = r.Next(1, 11);
+            ExamGrade = r.Next(1, 11);
 
             for(int i = 0; i < r.Next(1, 21); i++)
             {
@@ -75,7 +75,7 @@ namespace IPA
             LastName = Console.ReadLine();
 
             Console.Write("Iveskite studento egzamino pazymi: ");
-            examGrade = int.Parse(Console.ReadLine());
+            ExamGrade = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Iveskite studento namu darbu pazymius (-1 kad baigti): ");
             int grade = 0;
