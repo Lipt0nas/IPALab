@@ -104,7 +104,7 @@ namespace IPA
 
             foreach (Student s in students)
             {
-                Console.WriteLine("{0, -15}{1, -15}{2, -15}", s.Name, s.LastName, (median ? s.GetGradeMedian() : s.GetGradeAvg()).ToString("0.00"));
+                Console.WriteLine("{0, -15}{1, -15}{2, -15}", s.Name, s.LastName, s.getGradeAvg(median).ToString("0.00"));
             }
         }
 
@@ -117,7 +117,7 @@ namespace IPA
 
             foreach (Student s in students)
             {
-                Console.WriteLine("{0, -15}{1, -15}{2, -30}{3, -30}", s.Name, s.LastName, s.GetGradeAvg().ToString("0.00"), s.GetGradeMedian().ToString("0.00"));
+                Console.WriteLine("{0, -15}{1, -15}{2, -30}{3, -30}", s.Name, s.LastName, s.getGradeAvg(false).ToString("0.00"), s.getGradeAvg(true).ToString("0.00"));
             }
         }
 

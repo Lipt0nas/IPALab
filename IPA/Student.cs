@@ -24,29 +24,39 @@ namespace IPA
             HomeworkGrades.Add(grade);
         }
 
-        public float GetGradeAvg()
+        public float getGradeAvg(bool median)
+        {
+            return 0.3f * (median ? HomeworkMedian() : HomeworkAvg()) + 0.7f * ExamGrade;
+        }
+
+        private float HomeworkAvg()
         {
             int sum = HomeworkGrades.Sum();
 
-            return 0.3f * ((float)sum / HomeworkGrades.Count) + 0.7f * ExamGrade;
+            if(HomeworkGrades.Count == 0)
+            {
+                return 0.0f;
+            } else
+            {
+                return (float)sum / HomeworkGrades.Count;
+            }
         }
 
-        public float GetGradeMedian()
+        private float HomeworkMedian()
         {
-            float med = 0;
+            if (HomeworkGrades.Count == 0) return 0.0f;
+            if (HomeworkGrades.Count == 1) return HomeworkGrades.First();
 
             List<int> temp = new List<int>(HomeworkGrades);
             temp.Sort();
-            
+
             if(temp.Count % 2 == 0)
             {
-                med = temp.ElementAt(temp.Count / 2);
+               return temp.ElementAt(temp.Count / 2);
             } else
             {
-                med = (float)(temp.ElementAt(temp.Count / 2) + temp.ElementAt((temp.Count / 2) - 1)) / 2.0f;
+              return (float)(temp.ElementAt(temp.Count / 2) + temp.ElementAt((temp.Count / 2) - 1)) / 2.0f;
             }
-
-            return 0.3f * med + 0.7f * ExamGrade;
         }
 
         public void CreateRandom()
@@ -74,21 +84,36 @@ namespace IPA
             Console.Write("Iveskite studento pavarde: ");
             LastName = Console.ReadLine();
 
-            Console.Write("Iveskite studento egzamino pazymi: ");
-            ExamGrade = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.Write("Iveskite studento egzamino pazymi: ");
+                int examGrade;
+
+                if(int.TryParse(Console.ReadLine(), out examGrade)) {
+                    ExamGrade = examGrade;
+                    break;
+                } else
+                {
+                    Console.Write("Neteisingas Ivedimas, bandykite dar karta");
+                }
+            }
 
             Console.WriteLine("Iveskite studento namu darbu pazymius (-1 kad baigti): ");
             int grade = 0;
             while(true)
             {
-                grade = int.Parse(Console.ReadLine());
-
-                if(grade == -1)
-                {
-                    break;
+                if(int.TryParse(Console.ReadLine(), out grade)) {
+                    if (grade == -1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        AddHomeworkGrade(grade);
+                    }
                 } else
                 {
-                    AddHomeworkGrade(grade);    
+                    Console.Write("Neteisingas Ivedimas, bandykite dar karta");
                 }
             }
         }
