@@ -48,7 +48,7 @@ namespace IPA
             }
         }
 
-        public void InputStudents(bool random)
+        private void InputStudents(bool random)
         {
             while (true) {
                 Console.Clear();
@@ -78,27 +78,56 @@ namespace IPA
 
         private void ReadStudentsFromFile()
         {
+            Console.Clear();
+
             string line;
- 
-            System.IO.StreamReader file = new System.IO.StreamReader("kursiokai.txt");
-            while ((line = file.ReadLine()) != null)
+
+            try
             {
-                string[] args = line.Split(' ');
+                System.IO.StreamReader file = new System.IO.StreamReader("kursiokai.txt");
+                while ((line = file.ReadLine()) != null)
+                {
+                    string[] args = line.Split(' ');
 
-                Student student = new Student();
-                student.Name = args[0];
-                student.LastName = args[1];
-                for(int i = 0; i < 5; i++) { student.AddHomeworkGrade(int.Parse(args[2 + i])); };
-                student.ExamGrade = int.Parse(args[7]);
+                    if (args.Length != 8) continue;
 
-                students.Add(student);
+                    Student student = new Student();
+                    student.Name = args[0];
+                    student.LastName = args[1];
+                    for (int i = 0; i < 5; i++) {
+                        try
+                        {
+                            student.AddHomeworkGrade(int.Parse(args[2 + i]));
+                        } catch (Exception)
+                        {
+                            Console.WriteLine("Neisejo nuskaityti namu darbo pazymio [" + args[2 + i] + "]");
+                        }
+                    };
+
+                    try
+                    {
+                        student.ExamGrade = (int.Parse(args[7]));
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Neisejo nuskaityti egzamino pazymio [" + args[7] + "]");
+                    }
+
+                    students.Add(student);
+                }
+
+                file.Close();
+            } catch (Exception e)
+            {
+                Console.WriteLine("Ivyko klaida skaitant faila:");
+                Console.WriteLine(e.Message);
             }
-
-            file.Close();
         }
 
         private void DisplayStudentGrades(bool median)
         {
+            Console.Clear();
+
             Console.WriteLine("{0, -15}{1, -15}{2, -15}", "Vardas", "Pavarde", "Galutinis" + (median ? "(Med.)" : "(Vid.)"));
             Console.WriteLine("----------------------------------------------");
 
@@ -131,6 +160,7 @@ namespace IPA
                         Tuple.Create<string, Action>("Ne", () => { InputStudents(false); })
                     );
 
+                    Console.Clear();
                     ShowMenu("Skaiciuoti",
                         Tuple.Create<string, Action>("Pazymiu vidurki", () => { DisplayStudentGrades(false); }),
                         Tuple.Create<string, Action>("Pazymiu mediana", () => { DisplayStudentGrades(true); })
@@ -140,7 +170,7 @@ namespace IPA
                 Tuple.Create<string, Action>("Skaityti is failo", () => { ReadStudentsFromFile(); DisplayAllStudentGrades(); })
             );
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }

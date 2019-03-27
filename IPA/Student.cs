@@ -94,7 +94,7 @@ namespace IPA
                     break;
                 } else
                 {
-                    Console.Write("Neteisingas Ivedimas, bandykite dar karta");
+                    Console.WriteLine("\nNeteisingas Ivedimas, bandykite dar karta");
                 }
             }
 
@@ -113,7 +113,7 @@ namespace IPA
                     }
                 } else
                 {
-                    Console.Write("Neteisingas Ivedimas, bandykite dar karta");
+                    Console.WriteLine("Neteisingas Ivedimas, bandykite dar karta");
                 }
             }
         }
