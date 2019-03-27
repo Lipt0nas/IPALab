@@ -11,9 +11,6 @@ namespace IPA
         {
             List<Student> students = new List<Student>();
 
-            Console.WriteLine("Ar naudoti masyva(1) ar lista(2)?");
-            int type = int.Parse(Console.ReadLine());
-
             Console.WriteLine("Ar naudoti generuoti pazymius(1) ar ivesti ranka(2)?");
             int rand = int.Parse(Console.ReadLine());
 
@@ -21,22 +18,14 @@ namespace IPA
 
             while (true)
             {
-                Student s = null;
-
-                if(type == 1)
-                {
-                    s = new StudentArray();
-                } else
-                {
-                    s = new Student();
-                }
+                Student s = new Student();
 
                 if (rand == 1)
                 {
                     s.CreateRandom();
                 } else if(rand == 2)
                 {
-                    s.Create();
+                    s.Create();                
                 }
 
                 students.Add(s);
@@ -60,7 +49,7 @@ namespace IPA
                 Console.WriteLine("----------------------------------------------");
                 foreach (Student s in students)
                 {
-                    Console.WriteLine("{0, -15}{1, -15}{2, -15}", s.name, s.lastName, s.GetGradeAvg().ToString("0.00"));
+                    Console.WriteLine("{0, -15}{1, -15}{2, -15}", s.Name, s.LastName, s.GetGradeAvg().ToString("0.00"));
                 }
             } 
             else if(mode == 2)
@@ -69,7 +58,7 @@ namespace IPA
                 Console.WriteLine("----------------------------------------------");
                 foreach (Student s in students)
                 {
-                    Console.WriteLine("{0, -15}{1, -15}{2, -15}", s.name, s.lastName, s.GetGradeMedian().ToString("0.00"));
+                    Console.WriteLine("{0, -15}{1, -15}{2, -15}", s.Name, s.LastName, s.GetGradeMedian().ToString("0.00"));
                 }
             }
 

@@ -7,8 +7,8 @@ namespace IPA
 {
     class Student
     {
-        public string name { set; get; }
-        public string lastName { set; get; }
+        public string Name { set; get; }
+        public string LastName { set; get; }
 
         public int examGrade { get; set; }
 
@@ -19,19 +19,19 @@ namespace IPA
             homeworkGrades = new List<int>();
         }
 
-        public virtual void AddHomeworkGrade(int grade)
+        public void AddHomeworkGrade(int grade)
         {
             homeworkGrades.Add(grade);
         }
 
-        public virtual float GetGradeAvg()
+        public float GetGradeAvg()
         {
             int sum = homeworkGrades.Sum();
 
             return 0.3f * ((float)sum / homeworkGrades.Count) + 0.7f * examGrade;
         }
 
-        public virtual float GetGradeMedian()
+        public float GetGradeMedian()
         {
             float med = 0;
 
@@ -52,10 +52,10 @@ namespace IPA
         public void CreateRandom()
         {
             Console.Write("Iveskite studento varda: ");
-            name = Console.ReadLine();
+            Name = Console.ReadLine();
 
             Console.Write("Iveskite studento pavarde: ");
-            lastName = Console.ReadLine();
+            LastName = Console.ReadLine();
 
             Random r = new Random();
             examGrade = r.Next(1, 11);
@@ -69,10 +69,10 @@ namespace IPA
         public void Create()
         {
             Console.Write("Iveskite studento varda: ");
-            name = Console.ReadLine();
+            Name = Console.ReadLine();
 
             Console.Write("Iveskite studento pavarde: ");
-            lastName = Console.ReadLine();
+            LastName = Console.ReadLine();
 
             Console.Write("Iveskite studento egzamino pazymi: ");
             examGrade = int.Parse(Console.ReadLine());
