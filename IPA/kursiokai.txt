@@ -1,0 +1,4 @@
+name:vienas;sirname:one;homework:2,6,5,7,8,9;exam:10
+name:two;sirname:du;homework:2,6,7,8,9;exam:5
+name:three;sirname:trys;homework:2,5,7,8,9;exam:7
+name:four;sirname:keturi;homework:2,6,8,9;exam:3
