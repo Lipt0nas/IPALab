@@ -14,6 +14,8 @@ namespace IPA
 
         public List<int> HomeworkGrades { get; }
 
+        public float AverageGrade { get; set; }
+
         public Student()
         {
             HomeworkGrades = new List<int>();
@@ -38,7 +40,8 @@ namespace IPA
                 return 0.0f;
             } else
             {
-                return (float)sum / HomeworkGrades.Count;
+                AverageGrade = (float)sum / HomeworkGrades.Count;
+                return AverageGrade;
             }
         }
 

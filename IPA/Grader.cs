@@ -109,26 +109,66 @@ namespace IPA
 
             Random r = new Random();
 
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 List<Student> list = new List<Student>();
 
-                for(int j = 0; j < Math.Pow(10, i + 1); j++)
+                for (int j = 0; j < Math.Pow(10, i + 1); j++)
                 {
                     Student student = new Student();
                     student.Name = "Student_" + j;
                     student.LastName = "Sirname_" + j;
                     student.ExamGrade = r.Next(0, 11);
 
-                    for(int k = 0; k < 10; k++)
+                    for (int k = 0; k < 10; k++)
                     {
                         student.AddHomeworkGrade(r.Next(0, 11));
                     }
 
+                    student.getGradeAvg(false);
+
                     list.Add(student);
                 }
 
+
                 Writer.WriteStudentsToFile("_" + Math.Pow(10, i + 1) + ".txt", list);
+
+                list.Sort((o1, o2) => o1.AverageGrade.CompareTo(o2.AverageGrade));
+                int marker = list.Count / 2;
+                int direction = 0;
+
+                if (list.ElementAt(marker).AverageGrade >= 5.0f)
+                {
+                    direction = -1;
+                } else
+                {
+                    direction = 1;
+                }
+
+                while(true)
+                {
+                    marker += direction;
+
+                    if (direction > 0)
+                    {
+                        if (list.ElementAt(marker).AverageGrade >= 5.0f)
+                        {
+                            break;
+                        }
+                    }
+
+                    if(direction < 0)
+                    {
+                        if (list.ElementAt(marker).AverageGrade < 5.0f)
+                        {
+                            marker++;
+                            break;
+                        }
+                    }
+                }
+
+                Writer.WriteStudentsToFile("_" + Math.Pow(10, i + 1) + "_vargsiukai.txt", list.GetRange(0, marker));
+                Writer.WriteStudentsToFile("_" + Math.Pow(10, i + 1) + "_galvociai.txt", list.GetRange(marker, list.Count - marker));
             }
 
             Run();

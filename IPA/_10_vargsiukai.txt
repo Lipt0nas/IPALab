@@ -1,0 +1,6 @@
+name:Student_7;lastName:Sirname_7;exam:3;homework:1,0,6,0,7,0,6,3,7,4;
+name:Student_0;lastName:Sirname_0;exam:7;homework:3,6,4,1,1,0,6,2,8,9;
+name:Student_2;lastName:Sirname_2;exam:9;homework:6,5,3,3,5,2,6,7,4,3;
+name:Student_4;lastName:Sirname_4;exam:5;homework:5,7,3,8,2,0,4,7,9,2;
+name:Student_3;lastName:Sirname_3;exam:8;homework:5,5,0,9,8,6,1,7,2,5;
+name:Student_6;lastName:Sirname_6;exam:6;homework:10,9,5,8,0,1,10,0,4,2;
