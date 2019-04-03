@@ -107,6 +107,9 @@ namespace IPA
         {
             Console.Clear();
 
+            Stopwatch w = new Stopwatch();
+            w.Start();
+
             Random r = new Random();
 
             for (int i = 0; i < 5; i++)
@@ -170,6 +173,9 @@ namespace IPA
                 Writer.WriteStudentsToFile("_" + Math.Pow(10, i + 1) + "_vargsiukai.txt", list.GetRange(0, marker));
                 Writer.WriteStudentsToFile("_" + Math.Pow(10, i + 1) + "_galvociai.txt", list.GetRange(marker, list.Count - marker));
             }
+
+            w.Stop();
+            Console.WriteLine("Ivykdyta per: " + w.ElapsedMilliseconds + "ms");
 
             Run();
         }
