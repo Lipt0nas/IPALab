@@ -1,0 +1,10 @@
+name:Student_0;lastName:Sirname_0;exam:4;homework:5,6,9,3,0,1,6,4,8,6;
+name:Student_1;lastName:Sirname_1;exam:0;homework:0,1,7,5,8,6,7,10,8,5;
+name:Student_2;lastName:Sirname_2;exam:6;homework:0,3,3,6,6,2,4,8,4,9;
+name:Student_3;lastName:Sirname_3;exam:5;homework:6,8,9,3,9,2,1,1,5,8;
+name:Student_4;lastName:Sirname_4;exam:10;homework:8,9,6,10,7,3,0,3,2,3;
+name:Student_5;lastName:Sirname_5;exam:10;homework:10,5,6,10,5,6,4,0,10,2;
+name:Student_6;lastName:Sirname_6;exam:2;homework:6,6,9,7,5,8,5,9,6,0;
+name:Student_7;lastName:Sirname_7;exam:8;homework:1,6,5,0,7,5,0,8,1,7;
+name:Student_8;lastName:Sirname_8;exam:1;homework:7,9,3,8,9,7,6,8,5,8;
+name:Student_9;lastName:Sirname_9;exam:8;homework:6,3,10,0,0,9,2,9,4,8;

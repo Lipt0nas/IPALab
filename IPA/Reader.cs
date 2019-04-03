@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace IPA
 {
@@ -15,7 +16,7 @@ namespace IPA
 
             try
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(filePath);
+                StreamReader file = new StreamReader(filePath);
                 while ((line = file.ReadLine()) != null)
                 {
                     string[] values = line.Split(';');

@@ -103,6 +103,37 @@ namespace IPA
             }
         }
 
+        private void generateStudentLists()
+        {
+            Console.Clear();
+
+            Random r = new Random();
+
+            for(int i = 0; i < 5; i++)
+            {
+                List<Student> list = new List<Student>();
+
+                for(int j = 0; j < Math.Pow(10, i + 1); j++)
+                {
+                    Student student = new Student();
+                    student.Name = "Student_" + j;
+                    student.LastName = "Sirname_" + j;
+                    student.ExamGrade = r.Next(0, 11);
+
+                    for(int k = 0; k < 10; k++)
+                    {
+                        student.AddHomeworkGrade(r.Next(0, 11));
+                    }
+
+                    list.Add(student);
+                }
+
+                Writer.WriteStudentsToFile("_" + Math.Pow(10, i + 1) + ".txt", list);
+            }
+
+            Run();
+        }
+
         public void Run()
         {
             ShowMenu("Kaip sukurti studentus?",
@@ -120,7 +151,8 @@ namespace IPA
                     );
                 }),
 
-                Tuple.Create<string, Action>("Skaityti is failo", () => { students = Reader.ReadStudentsFromFile<List<Student>>("kursiokai.txt"); DisplayAllStudentGrades(); })
+                Tuple.Create<string, Action>("Skaityti is failo", () => { students = Reader.ReadStudentsFromFile<List<Student>>("kursiokai.txt"); DisplayAllStudentGrades(); }),
+                Tuple.Create<string, Action>("Sugeneruoti studentu sarasus", () => { generateStudentLists(); })
             );
 
             Console.ReadKey();
