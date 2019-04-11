@@ -112,7 +112,7 @@ namespace IPA
 
             Random r = new Random();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
                 List<Student> list = new List<Student>();
 
@@ -180,6 +180,103 @@ namespace IPA
             Run();
         }
 
+        public void testContainers()
+        {
+            //LIST
+            {
+                Stopwatch perf = new Stopwatch();
+                perf.Start();
+
+                List<Student> students = new List<Student>();
+                Reader.ReadStudentsFromFile("_1000000.txt", (Student s) => {
+                    students.Add(s);
+                });
+
+                List<Student> high = new List<Student>();
+                List<Student> low = new List<Student>();
+
+                foreach(Student s in students)
+                {
+                    s.getGradeAvg(false);
+
+                    if(s.AverageGrade >= 5.0f)
+                    {
+                        high.Add(s);
+                    }
+                    else
+                    {
+                        low.Add(s);
+                    }
+                }
+
+                perf.Stop();
+
+                Console.WriteLine("List<> uztruko " + perf.ElapsedMilliseconds + "ms");
+            }
+
+            //Queue
+            {
+                Stopwatch perf = new Stopwatch();
+                perf.Start();
+
+                Queue<Student> students = new Queue<Student>();
+                Reader.ReadStudentsFromFile("_1000000.txt", (Student s) => {
+                    students.Enqueue(s);
+                });
+                Queue<Student> high = new Queue<Student>();
+                Queue<Student> low = new Queue<Student>();
+
+                foreach (Student s in students)
+                {
+                    s.getGradeAvg(false);
+
+                    if (s.AverageGrade >= 5.0f)
+                    {
+                        high.Enqueue(s);
+                    }
+                    else
+                    {
+                        low.Enqueue(s);
+                    }
+                }
+
+                perf.Stop();
+
+                Console.WriteLine("Queue<> uztruko " + perf.ElapsedMilliseconds + "ms");
+            }
+
+            //Queue
+            {
+                Stopwatch perf = new Stopwatch();
+                perf.Start();
+
+                LinkedList<Student> students = new LinkedList<Student>();
+                Reader.ReadStudentsFromFile("_1000000.txt", (Student s) => {
+                    students.AddLast(s);
+                });
+                LinkedList<Student> high = new LinkedList<Student>();
+                LinkedList<Student> low = new LinkedList<Student>();
+
+                foreach (Student s in students)
+                {
+                    s.getGradeAvg(false);
+
+                    if (s.AverageGrade >= 5.0f)
+                    {
+                        high.AddLast(s);
+                    }
+                    else
+                    {
+                        low.AddLast(s);
+                    }
+                }
+
+                perf.Stop();
+
+                Console.WriteLine("LinkedList<> uztruko " + perf.ElapsedMilliseconds + "ms");
+            }
+        }
+
         public void Run()
         {
             ShowMenu("Kaip sukurti studentus?",
@@ -198,7 +295,8 @@ namespace IPA
                 }),
 
                 Tuple.Create<string, Action>("Skaityti is failo", () => { students = Reader.ReadStudentsFromFile<List<Student>>("kursiokai.txt"); DisplayAllStudentGrades(); }),
-                Tuple.Create<string, Action>("Sugeneruoti studentu sarasus", () => { generateStudentLists(); })
+                Tuple.Create<string, Action>("Sugeneruoti studentu sarasus", () => { generateStudentLists(); }),
+                Tuple.Create<string, Action>("Testuoti konteineriu greiti", () => { testContainers(); })
             );
 
             Console.ReadKey();
