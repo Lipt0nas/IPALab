@@ -277,10 +277,15 @@ namespace IPA
             }
         }
 
+        public void compareContainerTest()
+        {
+
+        }
+
         public void Run()
         {
             ShowMenu("Kaip sukurti studentus?",
-                Tuple.Create<string, Action>("Ivesti Ranka", () => {
+                Tuple.Create<string, Action>("Ivesti Ranka \t\t\t\t\t[V0.1]", () => {
                     Console.Clear();
                     ShowMenu("Ar generuoti studentu pazymius?", 
                         Tuple.Create<string, Action>("Taip", () => { InputStudents(true); }),
@@ -294,9 +299,10 @@ namespace IPA
                     );
                 }),
 
-                Tuple.Create<string, Action>("Skaityti is failo", () => { students = Reader.ReadStudentsFromFile<List<Student>>("kursiokai.txt"); DisplayAllStudentGrades(); }),
-                Tuple.Create<string, Action>("Sugeneruoti studentu sarasus", () => { generateStudentLists(); }),
-                Tuple.Create<string, Action>("Testuoti konteineriu greiti", () => { testContainers(); })
+                Tuple.Create<string, Action>("Skaityti is failo \t\t\t\t\t[V0.2 / V0.3]", () => { students = Reader.ReadStudentsFromFile<List<Student>>("kursiokai.txt"); DisplayAllStudentGrades(); }),
+                Tuple.Create<string, Action>("Sugeneruoti studentu sarasus \t\t\t[V0.4]", () => { generateStudentLists(); }),
+                Tuple.Create<string, Action>("Testuoti konteineriu greiti \t\t\t\t[V0.5]", () => { testContainers(); }),
+                Tuple.Create<string, Action>("Testuoti konteineriu greiti ir optimizacijas \t[V1.0]", () => { compareContainerTest(); })
             );
 
             Console.ReadKey();
