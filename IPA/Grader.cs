@@ -184,6 +184,7 @@ namespace IPA
         { 
             //LIST
             {
+
                 Stopwatch perf = new Stopwatch();
                 perf.Start();
 
@@ -285,7 +286,7 @@ namespace IPA
             Queue<Student> baseQueue = new Queue<Student>();
             LinkedList<Student> baseLinkedList = new LinkedList<Student>();
 
-            Reader.ReadStudentsFromFile("_100000.txt", (Student s) => {
+            Reader.ReadStudentsFromFile("_1000000.txt", (Student s) => {
                 s.getGradeAvg(false);
 
                 baseList.Add(s);
@@ -329,6 +330,48 @@ namespace IPA
                 low.Clear();
             }
 
+
+            {
+                profiler.begin("List optimizuota strategija");
+
+                baseList.Sort((o1, o2) => o1.AverageGrade.CompareTo(o2.AverageGrade));
+                int marker = baseList.Count / 2;
+                int direction = 0;
+
+                if (baseList.ElementAt(marker).AverageGrade >= 5.0f)
+                {
+                    direction = -1;
+                }
+                else
+                {
+                    direction = 1;
+                }
+
+                while (true)
+                {
+                    marker += direction;
+
+                    if (direction > 0)
+                    {
+                        if (baseList.ElementAt(marker).AverageGrade >= 5.0f)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (direction < 0)
+                    {
+                        if (baseList.ElementAt(marker).AverageGrade < 5.0f)
+                        {
+                            marker++;
+                            break;
+                        }
+                    }
+                }
+
+                profiler.end("List optimizuota strategija");
+            }
+
             {
                 Queue<Student> high = new Queue<Student>();
                 Queue<Student> low = new Queue<Student>();
@@ -362,6 +405,41 @@ namespace IPA
                 high.Clear();
                 low.Clear();
             }
+
+            /*{
+                LinkedList<Student> high = new LinkedList<Student>();
+                LinkedList<Student> low = new LinkedList<Student>();
+
+                profiler.begin("LinkedList 1 strategija");
+                foreach (Student s in baseLinkedList)
+                {
+                    if (s.AverageGrade >= 5.0f) high.AddLast(s);
+                    else low.AddLast(s);
+                }
+                profiler.end("LinkedList 1 strategija");
+
+                high.Clear();
+                low.Clear();
+            }
+
+            {
+                LinkedList<Student> high = new LinkedList<Student>(baseLinkedList);
+                LinkedList<Student> low = new LinkedList<Student>();
+
+                profiler.begin("LinkedList 2 strategija");
+                for (int i = high.Count - 1; i >= 0; i--)
+                {
+                    if (high.ElementAt(i).AverageGrade < 5.0f)
+                    {
+                        low.AddLast(high.ElementAt(i));
+                        high.Remove(high.ElementAt(i));
+                    }
+                }
+                profiler.end("LinkedList 2 strategija");
+
+                high.Clear();
+                low.Clear();
+            }*/
 
             profiler.process();
 
