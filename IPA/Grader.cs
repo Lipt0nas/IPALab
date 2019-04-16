@@ -181,7 +181,7 @@ namespace IPA
         }
 
         public void testContainers()
-        {
+        { 
             //LIST
             {
                 Stopwatch perf = new Stopwatch();
@@ -279,7 +279,95 @@ namespace IPA
 
         public void compareContainerTest()
         {
+            Console.WriteLine("Skaitomas failas...");
 
+            List<Student> baseList = new List<Student>();
+            Queue<Student> baseQueue = new Queue<Student>();
+            LinkedList<Student> baseLinkedList = new LinkedList<Student>();
+
+            Reader.ReadStudentsFromFile("_100000.txt", (Student s) => {
+                s.getGradeAvg(false);
+
+                baseList.Add(s);
+                baseQueue.Enqueue(s);
+                baseLinkedList.AddLast(s);
+            });
+
+            Console.WriteLine("Atliekami testai...");
+            Profiler profiler = new Profiler();
+
+            {
+                List<Student> high = new List<Student>();
+                List<Student> low = new List<Student>();
+
+                profiler.begin("List 1 strategija");
+                baseList.ForEach((Student s) => { if (s.AverageGrade >= 5.0f) high.Add(s); else low.Add(s); });
+                profiler.end("List 1 strategija");
+
+                high.Clear();
+                low.Clear();
+            }
+
+            {
+                List<Student> high = new List<Student>(baseList);
+                List<Student> low = new List<Student>();
+
+                profiler.begin("List 2 strategija");
+
+                for(int i = high.Count - 1; i >= 0; i--)
+                {
+                    if(high[i].AverageGrade < 5.0f)
+                    {
+                        low.Add(high[i]);
+                        high.RemoveAt(i);
+                    }
+                }
+
+                profiler.end("List 2 strategija");
+
+                high.Clear();
+                low.Clear();
+            }
+
+            {
+                Queue<Student> high = new Queue<Student>();
+                Queue<Student> low = new Queue<Student>();
+
+                profiler.begin("Queue 1 strategija");
+                foreach (Student s in baseQueue)
+                {
+                    if (s.AverageGrade >= 5.0f) high.Enqueue(s);
+                    else low.Enqueue(s);
+                }
+                profiler.end("Queue 1 strategija");
+
+                high.Clear();
+                low.Clear();
+            }
+
+            {
+                Queue<Student> high = new Queue<Student>();
+                Queue<Student> low = new Queue<Student>();
+
+                profiler.begin("Queue 2 strategija");
+                while(baseQueue.Count != 0)
+                {
+                    Student s = baseQueue.Dequeue();
+
+                    if (s.AverageGrade >= 5.0f) high.Enqueue(s);
+                    else low.Enqueue(s);
+                }
+                profiler.end("Queue 2 strategija");
+
+                high.Clear();
+                low.Clear();
+            }
+
+            profiler.process();
+
+            baseList.Clear();
+            baseQueue.Clear();
+            baseLinkedList.Clear();
         }
 
         public void Run()
