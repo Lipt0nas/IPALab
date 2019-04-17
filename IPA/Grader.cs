@@ -286,7 +286,7 @@ namespace IPA
             Queue<Student> baseQueue = new Queue<Student>();
             LinkedList<Student> baseLinkedList = new LinkedList<Student>();
 
-            Reader.ReadStudentsFromFile("_1000000.txt", (Student s) => {
+            Reader.ReadStudentsFromFile("_10000.txt", (Student s) => {
                 s.getGradeAvg(false);
 
                 baseList.Add(s);
@@ -333,10 +333,10 @@ namespace IPA
 
             {
                 profiler.begin("List optimizuota strategija");
-
-                baseList.Sort((o1, o2) => o1.AverageGrade.CompareTo(o2.AverageGrade));
                 int marker = baseList.Count / 2;
                 int direction = 0;
+
+                baseList.Sort((o1, o2) => o1.AverageGrade.CompareTo(o2.AverageGrade));
 
                 if (baseList.ElementAt(marker).AverageGrade >= 5.0f)
                 {
@@ -406,7 +406,7 @@ namespace IPA
                 low.Clear();
             }
 
-            /*{
+            {
                 LinkedList<Student> high = new LinkedList<Student>();
                 LinkedList<Student> low = new LinkedList<Student>();
 
@@ -439,7 +439,7 @@ namespace IPA
 
                 high.Clear();
                 low.Clear();
-            }*/
+            }
 
             profiler.process();
 
