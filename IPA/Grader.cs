@@ -286,7 +286,7 @@ namespace IPA
             Queue<Student> baseQueue = new Queue<Student>();
             LinkedList<Student> baseLinkedList = new LinkedList<Student>();
 
-            Reader.ReadStudentsFromFile("_10000.txt", (Student s) => {
+            Reader.ReadStudentsFromFile("_100000.txt", (Student s) => {
                 s.getGradeAvg(false);
 
                 baseList.Add(s);
